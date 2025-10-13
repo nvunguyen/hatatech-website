@@ -22,7 +22,7 @@
         @apply text-2xl font-bold sm:text-3xl;
     }
 
-    a:not(.btn) {
+    a:not(.btn):not(.no-underline) {
         @apply underline transition hover:opacity-80;
     }
 

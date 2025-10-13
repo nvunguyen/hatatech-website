@@ -1,30 +1,63 @@
 ---
-import Logo from '../components/Logo.astro';
-
 const navItems = [
     { linkText: 'Home', href: '/' },
-    { linkText: 'Revalidation', href: '/revalidation' },
-    { linkText: 'Image CDN', href: '/image-cdn' },
-    { linkText: 'Edge Function', href: '/edge' },
-    { linkText: 'Blobs', href: '/blobs' }
+    { linkText: 'Products', href: '/products' },
+    { linkText: 'About Us', href: '/about' },
+    { linkText: 'Contact', href: '/contact' }
 ];
 ---
 
-<nav class="flex flex-wrap items-center gap-4 pt-6 pb-16 sm:pt-12 sm:pb-24">
-    <a href="/">
-        <Logo />
-    </a>
-    {
-        !!navItems?.length && (
-            <ul class="flex flex-wrap gap-x-4 gap-y-1">
-                {navItems.map((item) => (
-                    <li>
-                        <a href={item.href} class="inline-block px-1.5 py-1 sm:px-3 sm:py-2">
+<header class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo/Brand Name -->
+            <a href="/" class="text-2xl font-extrabold text-green-700 tracking-wider no-underline">
+                Hatatech<span class="text-emerald-500"></span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex space-x-8">
+                {
+                    navItems.map((item) => (
+                        <a href={item.href} class="text-gray-600 hover:text-green-600 font-medium transition duration-150 ease-in-out no-underline">
                             {item.linkText}
                         </a>
-                    </li>
-                ))}
-            </ul>
-        )
-    }
-</nav>
+                    ))
+                }
+            </nav>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" type="button" class="md:hidden text-gray-500 hover:text-green-600 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {
+                navItems.map((item) => (
+                    <a href={item.href} class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-green-50 no-underline">
+                        {item.linkText}
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</header>
+
+<script>
+    // Mobile menu toggle functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    });
+</script>

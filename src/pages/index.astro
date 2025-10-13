@@ -1,21 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ContextAlert from '../components/ContextAlert.astro';
-import Markdown from '../components/Markdown.astro';
-
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
-
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
 ---
 
-<Layout title="Welcome to Astro.">
-    <ContextAlert class="mb-8" />
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+<Layout title="Agri-Tech Solutions | Automated Farm Tools">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-emerald-600 to-green-700 text-white p-8 md:p-16 rounded-xl shadow-2xl mb-12">
+        <div class="md:grid md:grid-cols-2 md:gap-12 items-center">
+            <div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+                    Automate Your Harvest. Maximize Your Yield.
+                </h1>
+                <p class="text-xl opacity-90 mb-8">
+                    Innovative machinery designed to boost efficiency and precision in agricultural processing, from coconut trimming to fruit peeling.
+                </p>
+                <a href="/products" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 inline-block">
+                    Explore Our Machines &rarr;
+                </a>
+            </div>
+            <div class="mt-8 md:mt-0 flex justify-center">
+                <!-- Placeholder image for a farm machine -->
+                <img src="https://placehold.co/400x300/10B981/ffffff?text=Smart+Farm+Tech" alt="A depiction of smart farm technology or automated tools" class="rounded-lg shadow-xl">
+            </div>
+        </div>
+    </div>
+
+    <!-- Value Proposition Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+            <div class="text-3xl text-green-600 mb-3">⚙️</div>
+            <h3 class="text-xl font-bold mb-2">High Efficiency</h3>
+            <p class="text-gray-600">Process more crops in less time with minimal labor input.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+            <div class="text-3xl text-green-600 mb-3">🌿</div>
+            <h3 class="text-xl font-bold mb-2">Precision Control</h3>
+            <p class="text-gray-600">Ensure consistent quality with automated and accurate operations.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300">
+            <div class="text-3xl text-green-600 mb-3">💰</div>
+            <h3 class="text-xl font-bold mb-2">Cost Reduction</h3>
+            <p class="text-gray-600">Lower operational costs and maximize returns on investment.</p>
+        </div>
+    </div>
 </Layout>
