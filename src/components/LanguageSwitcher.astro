@@ -5,12 +5,22 @@ const currentLang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
 
 // Remove language prefix from current path
-const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}(\/|$)/, '/');
+// For Vietnamese (default): keep path as-is
+// For English: remove /en prefix
+let pathWithoutLang = currentPath;
+if (currentLang === 'en') {
+    pathWithoutLang = currentPath.replace(/^\/en(\/|$)/, '/');
+}
+
+// Generate unique IDs to avoid conflicts when component is used multiple times
+const uniqueId = Math.random().toString(36).substr(2, 9);
+const buttonId = `language-menu-button-${uniqueId}`;
+const menuId = `language-menu-${uniqueId}`;
 ---
 
 <div class="relative inline-block text-left">
     <button
-        id="language-menu-button"
+        id={buttonId}
         type="button"
         class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-green-600 transition duration-150 ease-in-out no-underline"
         aria-expanded="false"
@@ -26,11 +36,11 @@ const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}(\/|$)/, '/');
     </button>
 
     <div
-        id="language-menu"
+        id={menuId}
         class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
         role="menu"
         aria-orientation="vertical"
-        aria-labelledby="language-menu-button"
+        aria-labelledby={buttonId}
     >
         <div class="py-1" role="none">
             {
@@ -54,23 +64,35 @@ const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}(\/|$)/, '/');
     </div>
 </div>
 
-<script>
+<script define:vars={{ buttonId, menuId }}>
     document.addEventListener('DOMContentLoaded', () => {
-        const button = document.getElementById('language-menu-button');
-        const menu = document.getElementById('language-menu');
+        const button = document.getElementById(buttonId);
+        const menu = document.getElementById(menuId);
 
         if (button && menu) {
             button.addEventListener('click', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
+
+                // Close any other open language menus
+                document.querySelectorAll('[id^="language-menu-"]').forEach(otherMenu => {
+                    if (otherMenu !== menu) {
+                        otherMenu.classList.add('hidden');
+                    }
+                });
+
+                // Toggle current menu
                 menu.classList.toggle('hidden');
                 const expanded = !menu.classList.contains('hidden');
                 button.setAttribute('aria-expanded', expanded.toString());
             });
 
             // Close menu when clicking outside
-            document.addEventListener('click', () => {
-                menu.classList.add('hidden');
-                button.setAttribute('aria-expanded', 'false');
+            document.addEventListener('click', (e) => {
+                if (!button.contains(e.target) && !menu.contains(e.target)) {
+                    menu.classList.add('hidden');
+                    button.setAttribute('aria-expanded', 'false');
+                }
             });
 
             // Prevent menu from closing when clicking inside it
