@@ -1,17 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/config';
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/config';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const getLocalizedPath = (path: string) => {
-    if (lang === 'en') return path;
+    if (lang === 'vi') return path;
     return `/${lang}${path}`;
 };
 ---
 
-<Layout title="Hatatech Solutions | Công Cụ Nông Nghiệp Tự Động">
+<Layout title="Hatatech Solutions | Automated Farm Tools">
     <!-- Hero Section -->
     <div class="bg-gradient-to-r from-emerald-600 to-green-700 text-white p-8 md:p-16 rounded-xl shadow-2xl mb-12">
         <div class="md:grid md:grid-cols-2 md:gap-12 items-center">

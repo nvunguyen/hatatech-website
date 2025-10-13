@@ -1,10 +1,13 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/config';
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <footer class="bg-gray-800 text-white mt-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-        <p class="text-sm">&copy; 2025 Hatatech. All rights reserved.</p>
-        <p class="text-xs text-gray-400 mt-2">Innovating the future of farming.</p>
+        <p class="text-sm">{t('footer.copyright')}</p>
+        <p class="text-xs text-gray-400 mt-2">{t('footer.tagline')}</p>
     </div>
 </footer>
